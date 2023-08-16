@@ -13,14 +13,14 @@ function App() {
     <>
       <BrowserRouter>
         <NavBar />
-        <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/my-account" element={<MyAccount />} />
-            <Route path="/my-order" element={<MyOrder />} />
-            <Route path="/my-orders" element={<MyOrders />} />
-            <Route path="/sing-in" element={<SingIn />} />
-            <Route path="/*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+              <Route path="/" element={<Home />}/>
+              <Route path="/my-account" element={<MyAccount />} />
+              <Route path="/my-order" element={<MyOrder />} />
+              <Route path="/my-orders" element={<MyOrders />} />
+              <Route path="/sing-in" element={<SingIn />} />
+              <Route path="/*" element={<NotFound />} />
+          </Routes>
     </BrowserRouter>
     </>
   )
