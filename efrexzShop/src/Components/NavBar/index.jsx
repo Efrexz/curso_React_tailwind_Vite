@@ -5,7 +5,7 @@ function NavBar (){
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
     return(
-        <nav className="flex justify-between items-center fixed z-10 w-full top-0 py-5 px-8 text-sm">
+        <nav className="flex justify-between items-center fixed z-10 w-full top-0 py-5 px-8 text-sm bg-white">
             <ul className="flex  items-center gap-3">
                 <li className="text-lg font-semibold">
                     <NavLink
