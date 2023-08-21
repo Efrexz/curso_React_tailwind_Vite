@@ -9,20 +9,34 @@ function Card ({data}){
     const { count,
             setCount,
             openProductDetail,
+            closeProductDetail,
             setProductToShow,
             cartProducts,
-            setCartProducts
+            setCartProducts,
+            openCheckoutMenu,
+            closeCheckoutMenu,
+            setOpenNotification,
+            openNotification,
             } = useContext(ShoppingCartContext);
 
     function showProduct(infoProduct){
         openProductDetail();
         setProductToShow(infoProduct);
+        closeCheckoutMenu();//cerramos al abrir un producto el carro de compras si esta abierto
     }
 
     function addProductToCart(productData){
         setCount(count + 1);
         setCartProducts([...cartProducts, productData]);
-        console.log(cartProducts);
+        closeProductDetail();//cerramos el carrito de compras si llega a estar abierto
+        openCheckoutMenu();//abrimos la lista de productos en el carrito
+
+        if(!openNotification){//cuando le demos click a agregar producto se vuelve true la notificacion para mostrar el mensaje de se ha agregado y a los 2 segundos volvemos a convertirlo a false para poder ocultar la notificacion
+            setOpenNotification(true);
+            setTimeout(() => {
+                setOpenNotification(false);
+            }, 2000);
+        }
     }
 
 

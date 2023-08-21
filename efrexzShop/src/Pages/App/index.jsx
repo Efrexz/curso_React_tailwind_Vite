@@ -1,6 +1,7 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import { NavBar } from "../../Components/NavBar";
 import { ShoppingCartProvider } from "../../Components/Context";
+import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import Home from "../Home";
 import MyAccount from "../MyAccount";
 import MyOrder from "../MyOrder";
@@ -15,6 +16,7 @@ function App() {
     <ShoppingCartProvider>
         <BrowserRouter>
           <NavBar />
+          <CheckoutSideMenu/>
           <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/my-account" element={<MyAccount />} />
