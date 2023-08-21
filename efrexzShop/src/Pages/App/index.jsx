@@ -1,5 +1,6 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import { NavBar } from "../../Components/NavBar";
+import { ShoppingCartProvider } from "../../Components/Context";
 import Home from "../Home";
 import MyAccount from "../MyAccount";
 import MyOrder from "../MyOrder";
@@ -11,8 +12,9 @@ import './App.css'
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <NavBar />
+    <ShoppingCartProvider>
+        <BrowserRouter>
+          <NavBar />
           <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/my-account" element={<MyAccount />} />
@@ -21,7 +23,8 @@ function App() {
               <Route path="/sing-in" element={<SingIn />} />
               <Route path="/*" element={<NotFound />} />
           </Routes>
-    </BrowserRouter>
+        </BrowserRouter>
+    </ShoppingCartProvider>
     </>
   )
 }

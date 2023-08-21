@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { ShoppingBagIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartContext } from "../Context";
 import { NavLink } from "react-router-dom";
 
 function NavBar (){
+
+    const {count} = useContext(ShoppingCartContext);
 
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
@@ -91,13 +96,8 @@ function NavBar (){
                         Sing In
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to= "/card"
-                    className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                        🛒0
-                </NavLink>
+            <li className="flex items-center">
+                <ShoppingBagIcon className="h-6 w-6 text-black-500 cursor-pointer"/>{count}
             </li>
             </ul>
         </nav>
