@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../Context";
 
 
@@ -40,6 +40,27 @@ function Card ({data}){
     }
 
 
+    function addButton(id) {//funcion para saber si ya tenemos el producto agregado en nuestro carrito cambiar el icono a check y no poder agregarlo otra vez
+        const isButtonChecked = cartProducts.filter(product => product.id === id).length > 0;//si ya existe en el carrito
+        if(!isButtonChecked){//devolvemos el icono de agregar
+            return(
+                <button
+                className="absolute right-0 top-0 bg-white rounded-full w-6 h-6 flex justify-center items-center p-1 m-2 font-bold text-2xl"
+                onClick={() => addProductToCart(data)}>
+                    <PlusIcon/>
+                </button>
+            )}
+        else{
+            return(//devolvemos el icono de check y quitamos el evento de agregar mas al carrito
+                <button
+                className="absolute right-0 top-0 bg-black text-green-600 rounded-full w-6 h-6 flex justify-center items-center p-1 m-2 font-bold text-2xl">
+                    <CheckIcon/>
+                </button>
+            )
+        }
+    }
+
+
     return (
         <div className="w-58 h-60 bg-white cursor-pointer rounded-lg">
             <figure className="relative w-full h-4/5">
@@ -47,11 +68,7 @@ function Card ({data}){
                 <img
                     className="w-full h-full object-contain rounded-lg" src={data.image} alt={data.title}
                     onClick={() => showProduct(data)} />
-                <button
-                className="absolute right-0 top-0 bg-white rounded-full w-6 h-6 flex justify-center items-center p-1 m-2 font-bold text-2xl"
-                onClick={() => addProductToCart(data)}>
-                    <PlusIcon/>
-                </button>
+                {addButton(data.id)/*Deacuerdo al id generamos la carta con el boton de agregar o el de check si ya esta en el carrito */}
             </figure>
             <p className="flex justify-between mt-2">
                 <span className="font-light text-sm truncate">{data.title}</span>
