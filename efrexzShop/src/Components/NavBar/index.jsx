@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function NavBar (){
 
-    const {count} = useContext(ShoppingCartContext);
+    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen} = useContext(ShoppingCartContext);
 
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
@@ -96,8 +96,9 @@ function NavBar (){
                         Sing In
                 </NavLink>
             </li>
-            <li className="flex items-center">
-                <ShoppingBagIcon className="h-6 w-6 text-black-500 cursor-pointer"/>{count}
+            <li className="flex items-center cursor-pointer" onClick={() => {setIsCheckoutMenuOpen(!isCheckoutMenuOpen)}}>
+                <ShoppingBagIcon
+                className="h-6 w-6 text-black-500"/>{count}
             </li>
             </ul>
         </nav>

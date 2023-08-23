@@ -37,6 +37,7 @@ function ShoppingCartProvider({children}){
             openProductDetail,
             closeProductDetail,
             isCheckoutMenuOpen,
+            setIsCheckoutMenuOpen,
             openCheckoutMenu,
             closeCheckoutMenu,
             productToShow,

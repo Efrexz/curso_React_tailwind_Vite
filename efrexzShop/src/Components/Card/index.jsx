@@ -40,9 +40,9 @@ function Card ({data}){
     }
 
 
-    function addButton(id) {//funcion para saber si ya tenemos el producto agregado en nuestro carrito cambiar el icono a check y no poder agregarlo otra vez
-        const isButtonChecked = cartProducts.filter(product => product.id === id).length > 0;//si ya existe en el carrito
-        if(!isButtonChecked){//devolvemos el icono de agregar
+    function renderIcon(id) {//funcion para saber si ya tenemos el producto agregado en nuestro carrito cambiar el icono a check y no poder agregarlo otra vez
+        const isInCart = cartProducts.some(product => product.id === id);//si ya existe algun elemento que tenga el id en el carrito
+        if(!isInCart){//devolvemos el icono de agregar
             return(
                 <button
                 className="absolute right-0 top-0 bg-white rounded-full w-6 h-6 flex justify-center items-center p-1 m-2 font-bold text-2xl"
@@ -68,7 +68,7 @@ function Card ({data}){
                 <img
                     className="w-full h-full object-contain rounded-lg" src={data.image} alt={data.title}
                     onClick={() => showProduct(data)} />
-                {addButton(data.id)/*Deacuerdo al id generamos la carta con el boton de agregar o el de check si ya esta en el carrito */}
+                {renderIcon(data.id)/*Deacuerdo al id generamos la carta con el boton de agregar o el de check si ya esta en el carrito */}
             </figure>
             <p className="flex justify-between mt-2">
                 <span className="font-light text-sm truncate">{data.title}</span>

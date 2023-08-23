@@ -2,10 +2,25 @@ import { useContext } from "react";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../Context";
 import { OrderCard } from "../OrderCard";
+import { totalPrice } from "../../utils";
 
 function CheckoutSideMenu () {
 
-    const {isCheckoutMenuOpen, closeCheckoutMenu, cartProducts} = useContext(ShoppingCartContext);
+    const {isCheckoutMenuOpen, closeCheckoutMenu, cartProducts, setCartProducts, count , setCount} = useContext(ShoppingCartContext);
+
+    function removeItemCart (id) {
+        const itemIndex = cartProducts.findIndex((product) => product.id === id);
+        const newCartList = [...cartProducts];//guardamos todos los productos en esta variable
+        newCartList.splice(itemIndex, 1);//modificamos esta lista segun el id del producto al eliminarlo
+        setCartProducts(newCartList);//modificamos el estado agregando el nuevo array modificado de items en el carrito
+        setCount(count - 1)//cada vez que eliminemos un producto del carrito modificamos el numero de productos agregados en nuestro icono del navbar
+
+        /*
+        Otra forma de hacerlo seria:
+        const filteredProducts = cartProducts.filter(product => product.id != id); Devuelve todos los elementos que sean diferente al id que enviamos
+        setCartProducts(filteredProducts);
+         */
+    }
 
 
     return(
@@ -18,18 +33,24 @@ function CheckoutSideMenu () {
                             onClick={() => closeCheckoutMenu()}/>
                     </div>
             </div>
-            <div className="px-6">
+            <div className="px-6 overflow-y-scroll">
                 {
                     cartProducts.map((product) => (//por cada producto en nuestro cartproducts generamos una nuevs card
                         <OrderCard
                             key = {product.id}
+                            id = {product.id}
                             price = {product.price}
                             title = {product.category}
                             imageUrl = {product.image}
+                            removeItemCart = {removeItemCart}
                         />
                     ))
                 }
             </div>
+            <p className="flex justify-between m-6 border-t-4 pt-2 items-center">
+                <span className="text-xl">Total:</span>
+                <span className="font-medium text-2xl">${totalPrice(cartProducts)}</span>
+            </p>
         </aside>
     )
 }
