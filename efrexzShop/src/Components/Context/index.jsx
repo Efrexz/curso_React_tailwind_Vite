@@ -25,8 +25,12 @@ function ShoppingCartProvider({children}){
     //Shopping cart - Add products to cart
     const [cartProducts, setCartProducts] = useState([]);
 
+    //Shopping cart - Order
+    const [order , setOrder ] = useState([]);
+
     //Show Notification Add Product - Show for 3 seconds
     const [openNotification , setOpenNotification ] = useState(false);
+
 
     return(
         <ShoppingCartContext.Provider value={{
@@ -44,6 +48,8 @@ function ShoppingCartProvider({children}){
             setProductToShow,
             cartProducts,
             setCartProducts,
+            order,
+            setOrder,
             openNotification,
             setOpenNotification,
             }}>

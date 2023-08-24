@@ -6,7 +6,16 @@ import { totalPrice } from "../../utils";
 
 function CheckoutSideMenu () {
 
-    const {isCheckoutMenuOpen, closeCheckoutMenu, cartProducts, setCartProducts, count , setCount} = useContext(ShoppingCartContext);
+    const {
+            isCheckoutMenuOpen,
+            closeCheckoutMenu,
+            cartProducts,
+            setCartProducts,
+            count,
+            setCount,
+            order,
+            setOrder,
+            } = useContext(ShoppingCartContext);
 
     function removeItemCart (id) {
         const itemIndex = cartProducts.findIndex((product) => product.id === id);
@@ -22,10 +31,23 @@ function CheckoutSideMenu () {
          */
     }
 
+    //funcion para agregar lo que tenemos en nuestro carrito a las ordenes
+    function handleCheckout(){
+        const orderToAdd = {
+            date: "24/08/2023",
+            products: cartProducts,
+            totalProducts : cartProducts.length,
+            totalPrice : totalPrice(cartProducts),
+        }
+        setOrder([...order, orderToAdd]);
+        setCartProducts([]);//volvemos la cantidad de productos en 0 en nuestro carrito
+        setCount(0)
+    }
+
 
     return(
-        <aside className={`${isCheckoutMenuOpen ? "flex" : "hidden"} flex-col  fixed right-0  top-[68px] border z-10 bg-white border-black rounded-lg w-[360px] h-[calc(100vh-68px)]`}>
-            <div className="flex justify-between p-6">
+        <aside className={`${isCheckoutMenuOpen ? "flex" : "hidden"} flex-col  fixed right-0  top-[68px] border z-10 bg-white p-6 border-black rounded-lg w-[360px] h-[calc(100vh-68px)]`}>
+            <div className="flex justify-between">
                     <h2 className="font-medium text-xl">My Order</h2>
                     <div>
                         <ArrowLeftOnRectangleIcon
@@ -33,7 +55,7 @@ function CheckoutSideMenu () {
                             onClick={() => closeCheckoutMenu()}/>
                     </div>
             </div>
-            <div className="px-6 overflow-y-scroll">
+            <div className="px-2 overflow-y-scroll flex-1 mt-6 mb-4">
                 {
                     cartProducts.map((product) => (//por cada producto en nuestro cartproducts generamos una nuevs card
                         <OrderCard
@@ -47,10 +69,15 @@ function CheckoutSideMenu () {
                     ))
                 }
             </div>
-            <p className="flex justify-between m-6 border-t-4 pt-2 items-center">
+            <p className="flex justify-between mb-5 border-t-4 pt-2 items-center">
                 <span className="text-xl">Total:</span>
                 <span className="font-medium text-2xl">${totalPrice(cartProducts)}</span>
             </p>
+            <button
+                className="bg-black w-full text-white py-2 rounded-lg font-medium"
+                onClick={() => handleCheckout()}
+                >Checkout
+            </button>
         </aside>
     )
 }
