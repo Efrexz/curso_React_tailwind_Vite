@@ -9,6 +9,7 @@ function OrderCard (props) {
 
     const {id, price , imageUrl , title, removeItemCart} = props;
 
+
     return(
         <div className="flex justify-between items-center mb-6">
             <figure className="w-20 h-20 flex  items-center gap-2">
@@ -18,10 +19,12 @@ function OrderCard (props) {
 
             <div className="flex items-center gap-1">
                 <p className="flex font-medium text-lg"> ${price}</p>
+                {/* Solo genera el icono de x si le mandamos la propiedad de eliminar item del carrito */
+                removeItemCart &&
                 <XMarkIcon
                 className="text-red-500 w-9 h-9 cursor-pointer"
                 onClick={() => removeItemCart(id)}
-                />
+                />}
             </div>
         </div>
     )

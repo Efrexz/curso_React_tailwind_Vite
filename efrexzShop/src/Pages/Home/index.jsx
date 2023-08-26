@@ -19,10 +19,10 @@ function Home() {
             <Layout>
                 Home
                 <div className="grid grid-cols-4 gap-4 w-full max-w-screen-lg">
-                {items?.map((item) => {
-                    return(<Card key={item.id} data={item}/>)
-                    })
-                }
+                    {items?.map((item) => {
+                        return(<Card key={item.id} data={item}/>)
+                        })
+                    }
                 </div>
                 <ProductDetail />
                 <Notification/>

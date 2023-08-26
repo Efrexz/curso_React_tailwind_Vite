@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../Context";
 import { OrderCard } from "../OrderCard";
@@ -41,7 +42,8 @@ function CheckoutSideMenu () {
         }
         setOrder([...order, orderToAdd]);
         setCartProducts([]);//volvemos la cantidad de productos en 0 en nuestro carrito
-        setCount(0)
+        setCount(0);
+        closeCheckoutMenu()
     }
 
 
@@ -73,11 +75,13 @@ function CheckoutSideMenu () {
                 <span className="text-xl">Total:</span>
                 <span className="font-medium text-2xl">${totalPrice(cartProducts)}</span>
             </p>
-            <button
-                className="bg-black w-full text-white py-2 rounded-lg font-medium"
-                onClick={() => handleCheckout()}
-                >Checkout
-            </button>
+            <Link to="/my-orders/last">
+                <button
+                    className="bg-black w-full text-white py-2 rounded-lg font-medium"
+                    onClick={() => handleCheckout()}
+                    >Checkout
+                </button>
+            </Link>
         </aside>
     )
 }
