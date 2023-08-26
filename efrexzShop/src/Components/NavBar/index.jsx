@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function NavBar (){
 
-    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen} = useContext(ShoppingCartContext);
+    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen, setFilteredItems} = useContext(ShoppingCartContext);
 
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
@@ -14,13 +14,15 @@ function NavBar (){
             <ul className="flex  items-center gap-3">
                 <li className="text-lg font-semibold">
                     <NavLink
-                        to= "/">
+                        to= "/"
+                        onClick={() => {setFilteredItems(null)}}>
                             Shopi
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
                         to= "/"
+                        onClick={() => {setFilteredItems(null)}/*limpiamos el filteredItems para que vuelva a renderizar todos los items al momento de ir al home ya que si no al cambiar de vista en nuestro navbar y habiamos copiado algo en nuestro imput de busqueda. quedaria como que no existe los productos*/}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
                             All
@@ -44,26 +46,10 @@ function NavBar (){
                 </li>
                 <li>
                     <NavLink
-                        to= "/furnitures"
+                        to= "/jewelery"
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
-                            Furnitures
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to= "/toys"
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                            Toys
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to= "/others"
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                            Others
+                            Jewelery
                     </NavLink>
                 </li>
             </ul>
