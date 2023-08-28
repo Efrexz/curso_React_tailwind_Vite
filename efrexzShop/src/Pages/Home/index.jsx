@@ -6,16 +6,12 @@ import { ShoppingCartContext } from "../../Components/Context";
 import { Notification } from "../../Components/Notification";
 
 function Home() {
-    const { items, searchByTitle, setSearchByTitle, filteredItems} = useContext(ShoppingCartContext);
+    const { setSearchByTitle, filteredItems} = useContext(ShoppingCartContext);
 
-    //funcion para si tenemos algun caracter en nuestro imput este se agregara al searchByTitle gracias al metodo onChange que tenemos en el imput y el array que nos devulva lo renderizamos. En tal caso que no exista ningun valor en nuestro input de busqueda por titulo. Renderizamos el total de nuestros items que nos devuelve el fetch
     function renderView() {
-        const itemsToRender = searchByTitle?.length > 0
-            ? filteredItems
-            : items;
 
-        if (itemsToRender?.length > 0) {
-            return itemsToRender.map(item => (
+        if (filteredItems?.length > 0) {
+            return filteredItems.map(item => (
                 <Card key={item.id} data={item} />
             ));
         } else {

@@ -36,7 +36,10 @@ function ShoppingCartProvider({children}){
 
     // Search products by title
     const [searchByTitle ,setSearchByTitle ] = useState(null);
-    console.log(searchByTitle);
+
+    // Search products by category
+    const [searchByCategory ,setSearchByCategory ] = useState(null);
+
 
     useEffect(() => {(
         fetch('https://fakestoreapi.com/products')
@@ -50,13 +53,34 @@ function ShoppingCartProvider({children}){
         return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
     }
 
+    //filtramos por categoria. El searchbycategory se obtiene al hacer click en los links de nuestro navbar. cambiaremos su valor segun lo seleccionado. Luego esta funcion la llamamos en nuestro page home para saber que debemos renderizar
+    function filterItemsByCategory(items, searchByCategory) {
+        return items?.filter(item => item.category.toLowerCase().includes(searchByCategory.toLowerCase()))
+    }
+
+    //funcion que segun el searchType que le enviemos llamara a una funcion filtrando los items
+    function filterBy(searchType, items, titleValue, categoryValue){
+        if(searchType === "BY_TITLE"){
+            return filterItemsByTitle(items, titleValue);
+        }
+        if(searchType === "BY_CATEGORY"){
+            return filterItemsByCategory(items, categoryValue);
+        }
+        if(searchType === "BY_TITLE_AND_BY_CATEGORY"){
+            return filterItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
+        }
+        if(!searchType){
+            return items;
+        }
+    }
+
     //cada vez que ocurra un cambio en items o searchByTitle. llamamos a la funcion para filtrar segun el titulo y lo guardamos en nuestros items filtrados para luego generarlos en nuestra pantalla
     useEffect(() => {
-        //si nuestro searchByTitle contiene al menos un caracter llamamos a la funcion de filtrar y le asignamos el valor a nuestros filteredItems para luego renderizar ese array nuevo que nos devuleve filtrado
-        if(searchByTitle?.length > 0){
-            setFilteredItems(filterItemsByTitle(items, searchByTitle))
-        }
-    }, [searchByTitle])
+        if(searchByTitle && searchByCategory){setFilteredItems(filterBy("BY_TITLE_AND_BY_CATEGORY", items , searchByTitle, searchByCategory))}
+        if(searchByTitle && !searchByCategory){setFilteredItems(filterBy("BY_TITLE", items , searchByTitle, searchByCategory))}
+        if(!searchByTitle && searchByCategory){setFilteredItems(filterBy("BY_CATEGORY", items , searchByTitle, searchByCategory))}
+        if(!searchByTitle && !searchByCategory){setFilteredItems(filterBy(null, items , searchByTitle, searchByCategory))}
+    }, [items,searchByTitle, searchByCategory])
 
 
     //Show Notification Add Product - Show for 3 seconds
@@ -88,6 +112,9 @@ function ShoppingCartProvider({children}){
             searchByTitle,
             setSearchByTitle,
             filteredItems,
+            searchByCategory,
+            setSearchByCategory,
+            filterItemsByCategory
             }}>
             {children}
         </ShoppingCartContext.Provider>

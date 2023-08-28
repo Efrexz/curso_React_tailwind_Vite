@@ -6,13 +6,18 @@ import { ShoppingCartContext } from "../../Components/Context";
 import { OrdersCard } from "../../Components/OrdersCard";
 
 function MyOrders() {
-    const { order } = useContext(ShoppingCartContext);
+    const { order, setSearchByTitle, setSearchByCategory } = useContext(ShoppingCartContext);
 
     return (
             <Layout>
                 <div className="flex justify-center items-center w-80 relative">
                     <Link to="/" className="absolute left-0">
-                        <ChevronLeftIcon className="w-7 h-7"/>
+                        <ChevronLeftIcon
+                            className="w-7 h-7"
+                            onClick={() => {
+                                setSearchByTitle(null);
+                                setSearchByCategory(null)
+                                }}/>
                     </Link>
                     <h1 className="font-medium text-xl ">
                         My Orders

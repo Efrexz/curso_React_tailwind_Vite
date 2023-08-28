@@ -12,7 +12,8 @@ function OrdersCard (props) {
             </p>
             <p className="flex items-center">
                 <span className="font-bold text-2xl">${totalPrice}</span>
-                <ChevronRightIcon className="w-7 h-7"/>
+                <ChevronRightIcon
+                    className="w-7 h-7"/>
             </p>
         </div>
     )

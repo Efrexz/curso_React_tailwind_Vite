@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function NavBar (){
 
-    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen, setFilteredItems} = useContext(ShoppingCartContext);
+    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen, setSearchByCategory} = useContext(ShoppingCartContext);
 
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
@@ -15,14 +15,14 @@ function NavBar (){
                 <li className="text-lg font-semibold">
                     <NavLink
                         to= "/"
-                        onClick={() => {setFilteredItems(null)}}>
+                        onClick={() => setSearchByCategory("")}>
                             Shopi
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
                         to= "/"
-                        onClick={() => {setFilteredItems(null)}/*limpiamos el filteredItems para que vuelva a renderizar todos los items al momento de ir al home ya que si no al cambiar de vista en nuestro navbar y habiamos copiado algo en nuestro imput de busqueda. quedaria como que no existe los productos*/}
+                        onClick={() => setSearchByCategory("")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
                             All
@@ -31,6 +31,7 @@ function NavBar (){
                 <li>
                     <NavLink
                         to= "/clothes"
+                        onClick={() => setSearchByCategory("clothing")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
                             Clothes
@@ -39,6 +40,7 @@ function NavBar (){
                 <li>
                     <NavLink
                         to= "/electronics"
+                        onClick={() => setSearchByCategory("electronics")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
                             Electronics
@@ -47,6 +49,7 @@ function NavBar (){
                 <li>
                     <NavLink
                         to= "/jewelery"
+                        onClick={() => setSearchByCategory("jewelery")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
                             Jewelery
