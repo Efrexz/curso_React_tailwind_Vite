@@ -1,7 +1,6 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { useContext } from "react";
 import { NavBar } from "../../Components/NavBar";
-import { ShoppingCartContext, ShoppingCartProvider } from "../../Components/Context";
+import { ShoppingCartProvider } from "../../Components/Context";
 import { CheckoutSideMenu } from "../../Components/CheckoutSideMenu";
 import Home from "../Home";
 import MyAccount from "../MyAccount";
@@ -11,11 +10,8 @@ import NotFound from "../NotFound";
 import SingIn from "../SingIn";
 import SingUp from "../SingUp";
 
-import './App.css'
 
 function App() {
-
-
   return (
     <>
       <ShoppingCartProvider>
@@ -23,8 +19,8 @@ function App() {
             <NavBar />
             <CheckoutSideMenu/>
             <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/:category" element={<Home />}/>
+                <Route path="/" element={ <Home />}/>
+                <Route path="/:category" element={ <Home />}/>
                 <Route path="/my-account" element={<MyAccount />} />
                 <Route path="/my-order" element={<MyOrder />} />
                 <Route path="/my-orders" element={<MyOrders />} />

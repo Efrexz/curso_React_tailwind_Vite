@@ -5,8 +5,13 @@ import { ShoppingCartContext } from "../../Components/Context";
 
 function SingIn() {
 
-    const {setIsUserLoggedIn} = useContext(ShoppingCartContext);
+    const {setSignOut} = useContext(ShoppingCartContext);
 
+
+            function handleSignOut(){
+                localStorage.setItem("sign-out" , JSON.stringify(false));
+                setSignOut(false);
+            }
     return (
             <Layout>
                     <h1 className="font-bold text-xl mb-7 ">
@@ -20,7 +25,7 @@ function SingIn() {
                         <Link to={"/home"}>
                             <button
                                 className="text-white bg-black w-full py-3 rounded-lg font-medium"
-                                onClick={() => setIsUserLoggedIn(true)}>
+                                onClick={() => handleSignOut()}>
                             Log in</button>
                         </Link>
                     </div>

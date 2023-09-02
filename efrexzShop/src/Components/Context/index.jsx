@@ -86,10 +86,34 @@ function ShoppingCartProvider({children}){
     //Show Notification Add Product - Show for 3 seconds
     const [openNotification , setOpenNotification ] = useState(false);
 
+    //singOut
+    const signOutInLocalStorage = localStorage.getItem("sign-out");//buscamos cual es el valor en nuestro localStorage para cuando recarguemos la pagina. Se vea el login si quedo como que no estaba iniciada sesion y si ya estaba iniciada que muestre los productos
+    const [signOut, setSignOut] = useState(signOutInLocalStorage);
 
-    //User logIn or logOut
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+    //My Account
+    const [account, setAccount] = useState({});
 
+    //funcion inicializar en el localStorage account y sign-out que se llama automaticamente
+    (function initializeLocalStorage(){
+        const accountInLocalStorage = localStorage.getItem("account");
+        const signOutInLocalStorage = localStorage.getItem("sign-out");
+        let parsedAccount;
+        let parsedSignOut;
+
+        if(!accountInLocalStorage){
+            localStorage.setItem("account", JSON.stringify({}));
+            parsedAccount = {};
+        }else{
+            parsedAccount = JSON.parse(accountInLocalStorage);
+        }
+
+        if(!signOutInLocalStorage){
+            localStorage.setItem("sign-out", JSON.stringify(false));
+            parsedSignOut = false;
+        }else{
+            parsedSignOut = JSON.parse(signOutInLocalStorage)
+        }
+    }());
 
     return(
         <ShoppingCartContext.Provider value={{
@@ -119,8 +143,10 @@ function ShoppingCartProvider({children}){
             searchByCategory,
             setSearchByCategory,
             filterItemsByCategory,
-            isUserLoggedIn,
-            setIsUserLoggedIn
+            signOut,
+            setSignOut,
+            account,
+            setAccount,
             }}>
             {children}
         </ShoppingCartContext.Provider>

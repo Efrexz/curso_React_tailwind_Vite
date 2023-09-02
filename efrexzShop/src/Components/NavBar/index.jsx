@@ -9,11 +9,16 @@ function NavBar (){
             isCheckoutMenuOpen,
             setIsCheckoutMenuOpen,
             setSearchByCategory,
-            isUserLoggedIn,
-            setIsUserLoggedIn} = useContext(ShoppingCartContext);
+            signOut,
+            setSignOut} = useContext(ShoppingCartContext);
+
+    function handleSignOut(){
+        localStorage.setItem("sign-out" , JSON.stringify(true));
+        setSignOut(true);
+    }
 
     function isUserLoggedInNavBar(userStatus){
-        if(userStatus){
+        if(!userStatus){
             return (
                 <ul className="flex  items-center gap-3">
                     <li className="text-gray-500">
@@ -38,7 +43,7 @@ function NavBar (){
                     <li>
                         <NavLink
                             to= "/sing-in"
-                            onClick={() => setIsUserLoggedIn(false)}
+                            onClick={() => handleSignOut()}
                             className={({ isActive }) =>
                                     isActive ? activeStyle : ""}>
                                 Sing Out
@@ -56,7 +61,6 @@ function NavBar (){
                     <li>
                         <NavLink
                             to= "/sing-in"
-                            onClick={() => setIsUserLoggedIn(false)}
                             className={({ isActive }) =>
                                     isActive ? activeStyle : ""}>
                                 Sing in
@@ -117,7 +121,7 @@ function NavBar (){
                 </li>
             </ul>
 
-            {isUserLoggedInNavBar(isUserLoggedIn)}
+            {isUserLoggedInNavBar(signOut)}
         </nav>
     )
 }
