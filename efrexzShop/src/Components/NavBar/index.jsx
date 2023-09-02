@@ -5,7 +5,67 @@ import { NavLink } from "react-router-dom";
 
 function NavBar (){
 
-    const {count, isCheckoutMenuOpen, setIsCheckoutMenuOpen, setSearchByCategory} = useContext(ShoppingCartContext);
+    const { count,
+            isCheckoutMenuOpen,
+            setIsCheckoutMenuOpen,
+            setSearchByCategory,
+            isUserLoggedIn,
+            setIsUserLoggedIn} = useContext(ShoppingCartContext);
+
+    function isUserLoggedInNavBar(userStatus){
+        if(userStatus){
+            return (
+                <ul className="flex  items-center gap-3">
+                    <li className="text-gray-500">
+                        Zyzz_448@hotmail.com
+                    </li>
+                    <li>
+                        <NavLink
+                            to= "/my-orders"
+                            className={({ isActive }) =>
+                                    isActive ? activeStyle : ""}>
+                                My Orders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to= "/my-account"
+                            className={({ isActive }) =>
+                                    isActive ? activeStyle : ""}>
+                                My Account
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to= "/sing-in"
+                            onClick={() => setIsUserLoggedIn(false)}
+                            className={({ isActive }) =>
+                                    isActive ? activeStyle : ""}>
+                                Sing Out
+                        </NavLink>
+                    </li>
+                    <li className="flex items-center cursor-pointer" onClick={() => {setIsCheckoutMenuOpen(!isCheckoutMenuOpen)}}>
+                        <ShoppingBagIcon
+                        className="h-6 w-6 text-black-500"/>{count}
+                    </li>
+            </ul>
+            )
+        }else{
+            return(
+                <ul className="flex  items-center gap-3">
+                    <li>
+                        <NavLink
+                            to= "/sing-in"
+                            onClick={() => setIsUserLoggedIn(false)}
+                            className={({ isActive }) =>
+                                    isActive ? activeStyle : ""}>
+                                Sing in
+                        </NavLink>
+                    </li>
+        </ul>
+            )
+        }
+    }
 
     const activeStyle = "underline underline-offset-4";//cuando se seleccione una categoria se añadira estos estilos
 
@@ -57,39 +117,7 @@ function NavBar (){
                 </li>
             </ul>
 
-            <ul className="flex  items-center gap-3">
-            <li className="text-gray-500">
-                Zyzz_448@hotmail.com
-            </li>
-            <li>
-                <NavLink
-                    to= "/my-orders"
-                    className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                        My Orders
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to= "/my-account"
-                    className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                        My Account
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to= "/sing-in"
-                    className={({ isActive }) =>
-                            isActive ? activeStyle : ""}>
-                        Sing In
-                </NavLink>
-            </li>
-            <li className="flex items-center cursor-pointer" onClick={() => {setIsCheckoutMenuOpen(!isCheckoutMenuOpen)}}>
-                <ShoppingBagIcon
-                className="h-6 w-6 text-black-500"/>{count}
-            </li>
-            </ul>
+            {isUserLoggedInNavBar(isUserLoggedIn)}
         </nav>
     )
 }

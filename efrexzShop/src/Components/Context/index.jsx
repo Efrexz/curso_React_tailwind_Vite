@@ -87,6 +87,10 @@ function ShoppingCartProvider({children}){
     const [openNotification , setOpenNotification ] = useState(false);
 
 
+    //User logIn or logOut
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+
+
     return(
         <ShoppingCartContext.Provider value={{
             count,
@@ -114,7 +118,9 @@ function ShoppingCartProvider({children}){
             filteredItems,
             searchByCategory,
             setSearchByCategory,
-            filterItemsByCategory
+            filterItemsByCategory,
+            isUserLoggedIn,
+            setIsUserLoggedIn
             }}>
             {children}
         </ShoppingCartContext.Provider>
