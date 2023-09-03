@@ -7,8 +7,8 @@ import MyAccount from "../MyAccount";
 import MyOrder from "../MyOrder";
 import MyOrders from "../MyOrders";
 import NotFound from "../NotFound";
-import SingIn from "../SingIn";
-import SingUp from "../SingUp";
+import SignIn from "../SignIn";
+import SignUp from "../SignUp";
 
 
 function App() {
@@ -26,8 +26,8 @@ function App() {
                 <Route path="/my-orders" element={<MyOrders />} />
                 <Route path="/my-orders/last" element={<MyOrder />} />
                 <Route path="/my-orders/:id" element={<MyOrder />} /*Si recibe algun id llama al componente my order*//>
-                <Route path="/sing-in" element={<SingIn />} />
-                <Route path="/sing-up" element={<SingUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

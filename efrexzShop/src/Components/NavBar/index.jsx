@@ -15,6 +15,7 @@ function NavBar (){
     function handleSignOut(){
         localStorage.setItem("sign-out" , JSON.stringify(true));
         setSignOut(true);
+        setIsCheckoutMenuOpen(false);//en caso que este abierto el carrito lo cerramos
     }
 
     function isUserLoggedInNavBar(userStatus){
@@ -42,11 +43,11 @@ function NavBar (){
                     </li>
                     <li>
                         <NavLink
-                            to= "/sing-in"
+                            to= "/sign-in"
                             onClick={() => handleSignOut()}
                             className={({ isActive }) =>
                                     isActive ? activeStyle : ""}>
-                                Sing Out
+                                Sign Out
                         </NavLink>
                     </li>
                     <li className="flex items-center cursor-pointer" onClick={() => {setIsCheckoutMenuOpen(!isCheckoutMenuOpen)}}>
@@ -60,10 +61,10 @@ function NavBar (){
                 <ul className="flex  items-center gap-3">
                     <li>
                         <NavLink
-                            to= "/sing-in"
+                            to= "/sign-in"
                             className={({ isActive }) =>
                                     isActive ? activeStyle : ""}>
-                                Sing in
+                                Sign in
                         </NavLink>
                     </li>
         </ul>

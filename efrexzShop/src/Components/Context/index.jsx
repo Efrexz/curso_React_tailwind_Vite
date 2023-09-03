@@ -86,8 +86,8 @@ function ShoppingCartProvider({children}){
     //Show Notification Add Product - Show for 3 seconds
     const [openNotification , setOpenNotification ] = useState(false);
 
-    //singOut
-    const signOutInLocalStorage = localStorage.getItem("sign-out");//buscamos cual es el valor en nuestro localStorage para cuando recarguemos la pagina. Se vea el login si quedo como que no estaba iniciada sesion y si ya estaba iniciada que muestre los productos
+    //signOut
+    const signOutInLocalStorage = JSON.parse(localStorage.getItem("sign-out"));//buscamos cual es el valor en nuestro localStorage para cuando recarguemos la pagina. Se vea el login si quedo como que no estaba iniciada sesion y si ya estaba iniciada que muestre los productos
     const [signOut, setSignOut] = useState(signOutInLocalStorage);
 
     //My Account
