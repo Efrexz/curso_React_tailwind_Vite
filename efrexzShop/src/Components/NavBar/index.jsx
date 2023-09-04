@@ -19,11 +19,14 @@ function NavBar (){
     }
 
     function isUserLoggedInNavBar(userStatus){
+        //llamamos el account guardado para obtener su email y renderizarlo en el navbar
+        const accountStringify = localStorage.getItem("account");
+        const parsedAccount = JSON.parse(accountStringify);
         if(!userStatus){
             return (
                 <ul className="flex  items-center gap-3">
                     <li className="text-gray-500">
-                        Zyzz_448@hotmail.com
+                        {parsedAccount.email}
                     </li>
                     <li>
                         <NavLink
@@ -79,14 +82,14 @@ function NavBar (){
             <ul className="flex  items-center gap-3">
                 <li className="text-lg font-semibold">
                     <NavLink
-                        to= "/"
+                        to= {signOut ? "sign-in" : "/"}
                         onClick={() => setSearchByCategory("")}>
                             Shopi
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
-                        to= "/"
+                        to= {signOut ? "sign-in" : "/"}
                         onClick={() => setSearchByCategory("")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
@@ -95,7 +98,7 @@ function NavBar (){
                 </li>
                 <li>
                     <NavLink
-                        to= "/clothes"
+                        to= {signOut ? "sign-in" : "/clothes"}
                         onClick={() => setSearchByCategory("clothing")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
@@ -104,7 +107,7 @@ function NavBar (){
                 </li>
                 <li>
                     <NavLink
-                        to= "/electronics"
+                        to= {signOut ? "sign-in" : "/electronics"}
                         onClick={() => setSearchByCategory("electronics")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>
@@ -113,7 +116,7 @@ function NavBar (){
                 </li>
                 <li>
                     <NavLink
-                        to= "/jewelery"
+                        to= {signOut ? "sign-in" : "/jewelery"}
                         onClick={() => setSearchByCategory("jewelery")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : ""}>

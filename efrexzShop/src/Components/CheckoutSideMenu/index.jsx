@@ -46,6 +46,7 @@ function CheckoutSideMenu () {
         closeCheckoutMenu()
     }
 
+    
 
     return(
         <aside className={`${isCheckoutMenuOpen ? "flex" : "hidden"} flex-col  fixed right-0  top-[68px] border z-10 bg-white p-6 border-black rounded-lg w-[360px] h-[calc(100vh-68px)]`}>
